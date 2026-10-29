@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hóa học 10 | Góc nhỏ Hóa học</title>
+
+  <style>
+    /* ===== 1. MÀU SẮC VÀ CÀI ĐẶT CHUNG ===== */
+    :root {
+      --blue: #dceeff;
+      --blue-dark: #719dd8;
+      --purple: #e8ddff;
+      --purple-dark: #8170c9;
+      --pink: #ffe4f0;
+      --cream: #fffaff;
+      --text: #4d4b69;
+      --white: #ffffff;
+      --shadow: 0 8px 25px rgba(115, 103, 170, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    /* ===== 2. THANH MENU ===== */
+    header {
+      background: rgba(255, 250, 255, 0.95);
+      border-bottom: 1px solid #eee6ff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 15px 0;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--purple-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue-dark);
+    }
+
+    /* ===== 3. PHẦN GIỚI THIỆU ===== */
+    .hero {
+      padding: 75px 0 65px;
+      background:
+        radial-gradient(circle at 10% 20%, #dceeff 0, transparent 28%),
+        radial-gradient(circle at 90% 30%, #eadfff 0, transparent 30%),
+        linear-gradient(135deg, #fffaff, #f6f4ff);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-label {
+      display: inline-block;
+      padding: 7px 16px;
+      background: white;
+      border: 1px solid #e7dcff;
+      border-radius: 30px;
+      color: var(--purple-dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.25;
+      margin: 22px auto;
+      max-width: 850px;
+      color: #7565b9;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      color: #686782;
+    }
+
+    .hero-art {
+      font-size: 3.5rem;
+      margin: 15px 0;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      margin: 5px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--purple-dark);
+      color: white;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-blue {
+      background: #8ab5e8;
+    }
+
+    /* ===== 4. CÁC PHẦN NỘI DUNG ===== */
+    section {
+      padding: 65px 0;
+      scroll-margin-top: 75px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading .eyebrow {
+      color: var(--purple-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      line-height: 1.3;
+      color: #7565b9;
+      margin: 8px 0;
+    }
+
+    h3 {
+      color: #7565b9;
+      line-height: 1.4;
+    }
+
+    .section-heading p {
+      max-width: 650px;
+      margin: 10px auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #eee7ff;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .blue-card {
+      background: #f0f7ff;
+    }
+
+    .purple-card {
+      background: #f7f2ff;
+    }
+
+    .pink-card {
+      background: #fff3f8;
+    }
+
+    .formula {
+      background: #f0f7ff;
+      border: 1px dashed #a8c8f0;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #527db7;
+      margin: 15px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .note {
+      border-left: 5px solid #a797e5;
+      background: #f7f2ff;
+      padding: 15px 18px;
+      border-radius: 0 14px 14px 0;
+      margin: 18px 0;
+    }
+
+    .warning {
+      border-left-color: #f1a4bd;
+      background: #fff1f6;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      margin: 3px;
+      background: var(--blue);
+      border-radius: 20px;
+      font-size: 0.82rem;
+    }
+
+    /* ===== 5. THANH TIẾN TRÌNH TAM GIÁC LỬA ===== */
+    .fire-triangle {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .fire-item {
+      text-align: center;
+      padding: 20px 10px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #e9e0ff;
+    }
+
+    .fire-item span {
+      display: block;
+      font-size: 2rem;
+    }
+
+    /* ===== 6. CÂU HỎI TRẮC NGHIỆM ===== */
+    .quiz-question {
+      background: white;
+      border: 1px solid #e8e0ff;
+      padding: 23px;
+      margin-bottom: 18px;
+      border-radius: 20px;
+    }
+
+    .quiz-question p {
+      font-weight: 700;
+    }
+
+    .answer {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin: 9px 0;
+      padding: 12px 15px;
+      background: #f7f4ff;
+      color: var(--text);
+      border: 1px solid #e7ddff;
+      border-radius: 12px;
+    }
+
+    .answer:hover {
+      background: #e9e2ff;
+    }
+
+    .answer.correct {
+      background: #e1f7e9;
+      border-color: #91d5a8;
+    }
+
+    .answer.wrong {
+      background: #ffe7ee;
+      border-color: #f0a3b8;
+    }
+
+    .feedback {
+      min-height: 28px;
+      font-weight: 700;
+      color: var(--purple-dark);
+    }
+
+    #score {
+      text-align: center;
+      font-weight: 800;
+      color: var(--purple-dark);
+      margin-top: 20px;
+    }
+
+    /* ===== 7. CHÂN TRANG ===== */
+    footer {
+      text-align: center;
+      padding: 35px 15px;
+      background: #eee8ff;
+      color: #69618c;
+    }
+
+    footer p {
+      margin: 5px;
+    }
+
+    /* ===== 8. ĐIỆN THOẠI ===== */
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .hero {
+        padding: 50px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fire-triangle {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 45px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <header>
+    <div class="container navbar">
+      <a class="logo" href="#home">🧪 Chemie Corner</a>
+
+      <nav class="nav-links">
+        <a href="#tong-quan">Tổng quan</a>
+        <a href="#phan-ung-chay">Phản ứng cháy</a>
+        <a href="#nhiet-do">Nhiệt độ</a>
+        <a href="#an-toan">An toàn</a>
+        <a href="#quiz">Quiz ✨</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- TRANG ĐẦU -->
+    <section class="hero" id="home">
+      <div class="container">
+        <span class="hero-label">
+          🌷 CHUYÊN ĐỀ HỌC TẬP HÓA HỌC 10
+        </span>
+
+        <div class="hero-art">🧪 🫧 🔥</div>
+
+        <h1>
+          Hóa học trong việc<br>
+          phòng chống cháy, nổ
+        </h1>
+
+        <p>
+          Cùng khám phá thế giới của phản ứng cháy, nhiệt độ,
+          nhiên liệu và những kiến thức hóa học giúp chúng ta
+          bảo vệ bản thân trong cuộc sống hằng ngày!
+        </p>
+
+        <a class="btn" href="#tong-quan">Bắt đầu khám phá ♡</a>
+        <a class="btn btn-blue" href="#quiz">Thử sức ngay!</a>
+
+        <p style="margin-top:22px;font-size:0.9rem">
+          Bộ sách: Kết nối tri thức với cuộc sống
+        </p>
+      </div>
+    </section>
+
+    <!-- TỔNG QUAN -->
+    <section id="tong-quan">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Let's learn chemistry</span>
+          <h2>📚 Bản đồ kiến thức</h2>
+          <p>
+            Chuyên đề gồm bốn bài học về cháy, nổ và cách
+            phòng chống những sự cố nguy hiểm.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card blue-card">
+            <div class="card-icon">🔥</div>
+            <h3>Bài 5. Sơ lược về phản ứng cháy, nổ</h3>
+            <p>
+              Tìm hiểu khái niệm phản ứng cháy, phản ứng nổ,
+              điều kiện xảy ra và các sản phẩm có hại.
+            </p>
+            <a href="#phan-ung-chay">Khám phá →</a>
+          </article>
+
+          <article class="card purple-card">
+            <div class="card-icon">🌡️</div>
+            <h3>Bài 6. Các nhiệt độ đặc trưng</h3>
+            <p>
+              Phân biệt điểm chớp cháy, nhiệt độ ngọn lửa
+              và nhiệt độ tự bốc cháy.
+            </p>
+            <a href="#nhiet-do">Khám phá →</a>
+          </article>
+
+          <article class="card pink-card">
+            <div class="card-icon">⚗️</div>
+            <h3>Bài 7. Hóa học về phản ứng cháy, nổ</h3>
+            <p>
+              Quan sát phương trình phản ứng cháy của một số
+              chất vô cơ, hữu cơ và tìm hiểu sản phẩm tạo thành.
+            </p>
+            <a href="#phuong-trinh">Khám phá →</a>
+          </article>
+
+          <article class="card blue-card">
+            <div class="card-icon">🧯</div>
+            <h3>Bài 8. Phòng chống cháy, nổ</h3>
+            <p>
+              Nhận biết nguyên tắc dập lửa, cách phòng ngừa
+              và hành động an toàn khi có sự cố.
+            </p>
+            <a href="#an-toan">Khám phá →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẢN ỨNG CHÁY -->
+    <section id="phan-ung-chay" style="background:#f1f7ff">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Lesson 01</span>
+          <h2>🔥 Phản ứng cháy là gì?</h2>
+          <p>Hiểu bản chất trước khi học phương trình nhé!</p>
+        </div>
+
+        <div class="card">
+          <h3>1. Khái niệm</h3>
+          <p>
+            Phản ứng cháy là phản ứng oxi hóa – khử giữa chất
+            cháy và chất oxi hóa, thường là oxygen, có tỏa nhiệt
+            và phát sáng.
+          </p>
+
+          <div class="note">
+            💡 <strong>Ghi nhớ:</strong> Phản ứng cháy giải phóng
+            năng lượng, thường dưới dạng nhiệt và ánh sáng.
+          </div>
+
+          <h3>2. Điều kiện xảy ra sự cháy</h3>
+          <p>
+            Tam giác lửa minh họa ba yếu tố cơ bản cần có
+            để duy trì sự cháy:
+          </p>
+
+          <div class="fire-triangle">
+            <div class="fire-item">
+              <span>🪵</span>
+              <strong>Chất cháy</strong>
+              <p>Ví dụ: gỗ, giấy, gas</p>
+            </div>
+
+            <div class="fire-item">
+              <span>💨</span>
+              <strong>Chất oxi hóa</strong>
+              <p>Thường là oxygen trong không khí</p>
+            </div>
+
+            <div class="fire-item">
+              <span>🌡️</span>
+              <strong>Nguồn nhiệt</strong>
+              <p>Đủ để đạt điều kiện bắt cháy</p>
+            </div>
+          </div>
+
+          <div class="note warning">
+            ⚠️ Loại bỏ một trong các yếu tố cần thiết có thể
+            làm ngừng sự cháy. Không tự thử đốt chất hóa học
+            hoặc nhiên liệu tại nhà.
+          </div>
+
+          <h3>3. Phản ứng cháy và phản ứng nổ</h3>
+          <p>
+            Phản ứng cháy thường diễn ra nhanh, tỏa nhiệt và
+            phát sáng. Phản ứng nổ có thể giải phóng năng lượng
+            rất nhanh, gây tăng áp suất đột ngột và tạo sóng áp
+            suất nguy hiểm.
+          </p>
+
+          <p>
+            <span class="tag">Cháy</span>
+            <span class="tag">Tỏa nhiệt</span>
+            <span class="tag">Phát sáng</span>
+            <span class="tag">Nguy cơ nổ</span>
+          </p>
+
+          <h3>4. Sản phẩm cháy có thể gây hại</h3>
+          <ul>
+            <li>
+              <strong>CO₂:</strong> Nồng độ cao có thể làm giảm
+              lượng oxygen sẵn có để hô hấp.
+            </li>
+            <li>
+              <strong>CO:</strong> Khí độc có thể sinh ra khi
+              nhiên liệu chứa carbon cháy không hoàn toàn.
+            </li>
+            <li>
+              <strong>Khói và bụi mịn:</strong> Gây kích ứng,
+              cản trở tầm nhìn và ảnh hưởng hệ hô hấp.
+            </li>
+          </ul>
+
+          <div class="note warning">
+            Không đốt than trong phòng kín. Khí CO không màu,
+            không mùi và có thể gây ngộ độc chết người.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NHIỆT ĐỘ -->
+    <section id="nhiet-do">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Lesson 02</span>
+          <h2>🌡️ Những nhiệt độ cần nhớ</h2>
+          <p>
+            Ba khái niệm dễ nhầm nhưng có ý nghĩa khác nhau.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card purple-card">
+            <div class="card-icon">✨</div>
+            <h3>Điểm chớp cháy</h3>
+            <p>
+              Là nhiệt độ thấp nhất trong điều kiện thử nghiệm
+              quy định mà chất lỏng tạo đủ hơi để hơi đó chớp
+              cháy khi gặp nguồn mồi lửa.
+            </p>
+          </article>
+
+          <article class="card blue-card">
+            <div class="card-icon">🔥</div>
+            <h3>Nhiệt độ ngọn lửa</h3>
+            <p>
+              Là nhiệt độ của vùng phản ứng cháy hoặc sản phẩm
+              cháy. Giá trị phụ thuộc vào nhiên liệu, điều kiện
+              cháy và lượng không khí.
+            </p>
+          </article>
+
+          <article class="card pink-card">
+            <div class="card-icon">♨️</div>
+            <h3>Nhiệt độ tự bốc cháy</h3>
+            <p>
+              Là nhiệt độ thấp nhất mà tại đó chất có thể tự
+              bắt cháy trong những điều kiện thử nghiệm xác định,
+              không cần nguồn mồi lửa bên ngoài.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">📝</div>
+            <h3>Mẹo ghi nhớ</h3>
+            <p>
+              <strong>Chớp cháy:</strong> hơi chất gặp nguồn mồi.<br>
+              <strong>Ngọn lửa:</strong> nhiệt độ trong vùng cháy.<br>
+              <strong>Tự bốc cháy:</strong> tự bắt cháy khi đạt
+              điều kiện nhiệt độ thích hợp.
+            </p>
+          </article>
+        </div>
+
+        <div class="note">
+          📌 Các giá trị nhiệt độ phụ thuộc chất và điều kiện
+          đo. Không dùng một con số chung cho mọi nhiên liệu.
+        </div>
+      </div>
+    </section>
+
+    <!-- PHƯƠNG TRÌNH -->
+    <section id="phuong-trinh" style="background:#f8f3ff">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Lesson 03</span>
+          <h2>⚗️ Hóa học của phản ứng cháy</h2>
+          <p>
+            Cùng xem các phương trình hóa học tiêu biểu.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon">🪨</div>
+            <h3>Carbon cháy trong oxygen</h3>
+            <div class="formula">
+              C + O₂ → CO₂
+            </div>
+            <p>
+              Khi carbon cháy hoàn toàn trong oxygen,
+              sản phẩm là carbon dioxide.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🍳</div>
+            <h3>Khí methane cháy hoàn toàn</h3>
+            <div class="formula">
+              CH₄ + 2O₂ → CO₂ + 2H₂O
+            </div>
+            <p>
+              Methane là thành phần chính của khí thiên nhiên.
+              Phản ứng tạo carbon dioxide và nước.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">✨</div>
+            <h3>Magnesium cháy</h3>
+            <div class="formula">
+              2Mg + O₂ → 2MgO
+            </div>
+            <p>
+              Magnesium cháy với ánh sáng trắng rất mạnh,
+              tạo magnesium oxide.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">💨</div>
+            <h3>Cháy không hoàn toàn</h3>
+            <div class="formula">
+              2CH₄ + 3O₂ → 2CO + 4H₂O
+            </div>
+            <p>
+              Khi oxygen không đủ, methane có thể tạo carbon
+              monoxide (CO), một khí rất độc.
+            </p>
+          </article>
+        </div>
+
+        <div class="note warning">
+          ⚠️ Không tự thực hiện thí nghiệm đốt magnesium,
+          methane hoặc các hóa chất khác. Những phương trình
+          trên dùng để học tập, không phải hướng dẫn thực hành.
+        </div>
+      </div>
+    </section>
+
+    <!-- PHÒNG CHỐNG CHÁY -->
+    <section id="an-toan">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Lesson 04</span>
+          <h2>🧯 Phòng chống cháy, nổ</h2>
+          <p>
+            Kiến thức hóa học hữu ích nhất là kiến thức giúp
+            chúng ta giữ an toàn.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card blue-card">
+            <div class="card-icon">🧊</div>
+            <h3>Làm giảm nhiệt độ</h3>
+            <p>
+              Làm mát vật cháy bằng phương tiện phù hợp có thể
+              đưa nhiệt độ xuống dưới mức duy trì sự cháy.
+            </p>
+          </article>
+
+          <article class="card purple-card">
+            <div class="card-icon">🚫</div>
+            <h3>Cách li chất cháy</h3>
+            <p>
+              Loại bỏ hoặc cách li nhiên liệu khỏi vùng cháy
+              khi việc đó an toàn và được thực hiện đúng cách.
+            </p>
+          </article>
+
+          <article class="card pink-card">
+            <div class="card-icon">💨</div>
+            <h3>Hạn chế chất oxi hóa</h3>
+            <p>
+              Một số phương tiện chữa cháy làm giảm sự tiếp xúc
+              của chất cháy với oxygen. Cần chọn phương tiện
+              phù hợp với từng loại đám cháy.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🏠</div>
+            <h3>Phòng ngừa hằng ngày</h3>
+            <ul>
+              <li>Không để vật dễ cháy gần nguồn nhiệt.</li>
+              <li>Kiểm tra thiết bị điện và bếp gas.</li>
+              <li>Không tích trữ nhiên liệu tùy tiện.</li>
+              <li>Giữ lối thoát hiểm thông thoáng.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="note warning">
+          <strong>🚨 Khi phát hiện cháy:</strong>
+          <ul>
+            <li>Báo động cho mọi người và nhanh chóng thoát nạn.</li>
+            <li>Gọi 114 tại Việt Nam để báo cháy, cứu nạn.</li>
+            <li>Không quay lại lấy đồ và không dùng thang máy.</li>
+            <li>
+              Không dùng nước chữa cháy dầu mỡ đang cháy hoặc
+              thiết bị điện chưa được ngắt nguồn.
+            </li>
+          </ul>
+          Ưu tiên thoát hiểm và làm theo hướng dẫn của lực lượng
+          cứu hỏa; chỉ chữa cháy khi đã được huấn luyện và có
+          đường thoát an toàn.
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" style="background:#f1f7ff">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Mini game</span>
+          <h2>🎀 Góc kiểm tra kiến thức</h2>
+          <p>
+            Chọn một đáp án cho mỗi câu. Bấm vào đáp án để xem
+            kết quả nhé!
+          </p>
+        </div>
+
+        <div class="quiz-question" data-correct="1">
+          <p>1. Phản ứng cháy thường có đặc điểm nào?</p>
+          <button class="answer" data-option="0">
+            A. Chỉ thu nhiệt
+          </button>
+          <button class="answer" data-option="1">
+            B. Tỏa nhiệt và phát sáng
+          </button>
+          <button class="answer" data-option="2">
+            C. Không phải phản ứng hóa học
+          </button>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-correct="2">
+          <p>2. Khí nào sau đây rất độc, có thể sinh ra khi cháy không hoàn toàn?</p>
+          <button class="answer" data-option="0">
+            A. Oxygen (O₂)
+          </button>
+          <button class="answer" data-option="1">
+            B. Hydrogen (H₂)
+          </button>
+          <button class="answer" data-option="2">
+            C. Carbon monoxide (CO)
+          </button>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-correct="0">
+          <p>3. Đâu là ba yếu tố của tam giác lửa?</p>
+          <button class="answer" data-option="0">
+            A. Chất cháy, chất oxi hóa, nguồn nhiệt
+          </button>
+          <button class="answer" data-option="1">
+            B. Nước, đất, ánh sáng
+          </button>
+          <button class="answer" data-option="2">
+            C. Khói, tro, hơi nước
+          </button>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-correct="1">
+          <p>4. Khi phát hiện đám cháy lớn, nên làm gì trước tiên?</p>
+          <button class="answer" data-option="0">
+            A. Quay lại lấy đồ
+          </button>
+          <button class="answer" data-option="1">
+            B. Báo động, thoát hiểm và gọi 114
+          </button>
+          <button class="answer" data-option="2">
+            C. Mở cửa để tìm nơi cháy
+          </button>
+          <div class="feedback"></div>
+        </div>
+
+        <div id="score">🌷 Bạn đã trả lời đúng: 0/4 câu</div>
+
+        <div style="text-align:center;margin-top:20px">
+          <button class="btn" id="reset-quiz">
+            Làm lại bài quiz ↻
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KẾT THÚC -->
+    <section id="ket-thuc">
+      <div class="container">
+        <div class="card purple-card" style="text-align:center">
+          <div class="card-icon">🌈</div>
+          <h2>Học Hóa để hiểu và bảo vệ cuộc sống!</h2>
+          <p>
+            Hóa học không chỉ có công thức và phương trình.
+            Kiến thức về cháy, nổ còn giúp chúng ta hiểu các
+            nguy cơ và biết cách phòng tránh tai nạn.
+          </p>
+          <a class="btn" href="#home">Quay về đầu trang ↑</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>🧪 <strong>Chemie Corner</strong> 💜</p>
+    <p>Chuyên đề học tập Hóa học 10 · Kết nối tri thức với cuộc sống</p>
+    <p>Website học tập do học sinh thực hiện ✨</p>
+  </footer>
+
+  <script>
+    // ===== QUIZ TƯƠNG TÁC =====
+    const questions = document.querySelectorAll(".quiz-question");
+    const scoreText = document.getElementById("score");
+    let score = 0;
+
+    questions.forEach((question) => {
+      const buttons = question.querySelectorAll(".answer");
+      const feedback = question.querySelector(".feedback");
+      const correct = Number(question.dataset.correct);
+      let answered = false;
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (answered) return;
+          answered = true;
+
+          const selected = Number(button.dataset.option);
+
+          if (selected === correct) {
+            button.classList.add("correct");
+            feedback.textContent = "✨ Chính xác! Bạn giỏi lắm!";
+            score++;
+          } else {
+            button.classList.add("wrong");
+            buttons.forEach((item) => {
+              if (Number(item.dataset.option) === correct) {
+                item.classList.add("correct");
+              }
+            });
+            feedback.textContent =
+              "💜 Chưa đúng rồi, hãy ghi nhớ đáp án màu xanh nhé!";
+          }
+
+          scoreText.textContent =
+            `🌷 Bạn đã trả lời đúng: ${score}/${questions.length} câu`;
+        });
+      });
+    });
+
+    // ===== NÚT LÀM LẠI =====
+    document.getElementById("reset-quiz").addEventListener("click", () => {
+      score = 0;
+
+      questions.forEach((question) => {
+        question.querySelectorAll(".answer").forEach((button) => {
+          button.classList.remove("correct", "wrong");
+        });
+
+        question.querySelector(".feedback").textContent = "";
+
+        // Tạo lại nút bằng cách thay thế để cho phép trả lời lại
+        const oldButtons = question.querySelectorAll(".answer");
+        oldButtons.forEach((oldButton) => {
+          const newButton = oldButton.cloneNode(true);
+          oldButton.replaceWith(newButton);
+        });
+
+        const buttons = question.querySelectorAll(".answer");
+        const feedback = question.querySelector(".feedback");
+        const correct = Number(question.dataset.correct);
+        let answered = false;
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            if (answered) return;
+            answered = true;
+
+            const selected = Number(button.dataset.option);
+
+            if (selected === correct) {
+              button.classList.add("correct");
+              feedback.textContent = "✨ Chính xác! Bạn giỏi lắm!";
+              score++;
+            } else {
+              button.classList.add("wrong");
+              buttons.forEach((item) => {
+                if (Number(item.dataset.option) === correct) {
+                  item.classList.add("correct");
+                }
+              });
+              feedback.textContent =
+                "💜 Chưa đúng rồi, hãy ghi nhớ đáp án màu xanh nhé!";
+            }
+
+            scoreText.textContent =
+              `🌷 Bạn đã trả lời đúng: ${score}/${questions.length} câu`;
+          });
+        });
+      });
+
+      scoreText.textContent = `🌷 Bạn đã trả lời đúng: 0/${questions.length} câu`;
+      document.getElementById("quiz").scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+
+</body>
+</html>
